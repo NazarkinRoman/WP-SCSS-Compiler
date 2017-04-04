@@ -1,26 +1,27 @@
 # WP SCSS Compiler
 ### <https://github.com/NazarkinRoman/WP-SCSS-Compiler/>
 
-Simple class providing integration between WordPress and PHP SCSS Compiler by @leafo
+Simple class providing a little magic in integration between WordPress and PHP SCSS Compiler by [@leafo](https://github.com/leafo/)
 
 ## Usage
-`WP-SCSS-Compiler` uses [leafo/scssphp](https://github.com/leafo/scssphp/) as a dependency so make sure to download it too. Once you have downloaded all necessary files, just require main file inside your `functions.php` file:
+`WP-SCSS-Compiler` uses [`leafo/scssphp`](https://github.com/leafo/scssphp/) as a dependency so make sure to download it too. Once you have downloaded all necessary files, just require main file inside your `functions.php` file:
 
-```
+```php
 require_once 'WP_SCSS_Compiler.php';
 ```
 
 And then equip your `scss` files just like regular `css` ones:
-```
+```php
 add_action( 'wp_enqueue_scripts', 'mytheme_enqueue_styles' );
 function mytheme_enqueue_styles() {
 	wp_enqueue_style( 'my-handlename', get_template_directory_uri() . '/styles-directory/file.scss' );
 }
 
 ```
+Your style will be automatically compiled and then refreshed once some variable or source file getting changed.
 
 To pass variables into compiler use `wp_scss_variables` filter:
-```
+```php
 add_filter( 'wp_scss_variables', 'mytheme_scss_vars', 10, 2 );
 function mytheme_scss_vars( $vars, $handle ) {
 
